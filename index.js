@@ -1,5 +1,9 @@
 // Task 1
 
+//
+
+// Task 2
+
 const workingTime = [9, 18];
 const timeOut = [
   [9, 10],
@@ -47,6 +51,4 @@ const getWorkTime = (totalTime, outTime) => {
   return result;
 };
 
-console.log("Task 1:\n", getWorkTime(workingTime, timeOut));
-
-// Task 2
+console.log("Task 2:\n", getWorkTime(workingTime, timeOut));
