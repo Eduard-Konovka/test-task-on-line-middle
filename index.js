@@ -16,12 +16,17 @@ const timeOut = [
 ];
 
 const getWorkTime = (totalTime, outTime) => {
+  // Массив [начало, конец] рабочего дня превращает в
+  // дискретный вектор рабочего дня - растягивает массив,
+  // заполняя промежутки через каждые пол часа
   const workingHours = [];
   const workingHoursLength = totalTime[1] - totalTime[0];
   for (let i = 0; i < workingHoursLength; i += 1) {
     workingHours.push(totalTime[0] + i, totalTime[0] + i + 0.5);
   }
 
+  // Создаёт массив наложенных друг на друга векторов
+  // прогулянных часов по тому же принципу
   const outWorkingHours = outTime.reduce((acc, arr) => {
     const outHoursLength = arr[1] - arr[0];
     for (let i = 0; i < outHoursLength; i += 1) {
@@ -30,8 +35,12 @@ const getWorkTime = (totalTime, outTime) => {
     return acc;
   }, []);
 
+  // Вычитает вектора прогулов из вектора рабочего дня
   const inWorkTime = workingHours.filter((el) => !outWorkingHours.includes(el));
 
+  // Удаляет промежуточные значения
+  // между концами векторов оставшегося рабочего времени,
+  // т.е. превращает вектора в массивы [начало, конец]
   const fractionalTimes = [];
   for (let i = 0; i < inWorkTime.length; i += 1) {
     inWorkTime[i] !== inWorkTime[i - 1] + 0.5 &&
@@ -40,8 +49,10 @@ const getWorkTime = (totalTime, outTime) => {
       fractionalTimes.push(inWorkTime[i]);
   }
 
+  // Округляет верхние значения массивов до целого значения
   const integer = fractionalTimes.map((el) => Math.round(el));
 
+  // Делит сплошной массив на интервалы рабочего времени
   const result = [];
   for (let i = 0; i < integer.length; i += 2) {
     const chunk = integer.slice(i, i + 2);
