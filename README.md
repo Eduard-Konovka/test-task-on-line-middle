@@ -18,11 +18,11 @@ const input = [
 
 ```js
 [
-  { from: Kyiv, to: Chisinau },
-  { from: Chisinau, to: Bucuresti },
-  { from: Bucuresti, to: Ankara },
-  { from: Ankara, to: Tel_Aviv },
-  { from: Tel_Aviv, to: Dubai },
+  { from: "Kyiv", to: "Chisinau" },
+  { from: "Chisinau", to: "Bucuresti" },
+  { from: "Bucuresti", to: "Ankara" },
+  { from: "Ankara", to: "Tel Aviv" },
+  { from: "Tel Aviv", to: "Dubai" },
 ];
 ```
 
