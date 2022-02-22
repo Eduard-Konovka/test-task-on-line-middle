@@ -1,6 +1,45 @@
 // Task 1
 
-//
+const input = [
+  { from: "Ankara", to: "Tel Aviv" },
+  { from: "Tel Aviv", to: "Dubai" },
+  { from: "Kyiv", to: "Chisinau" },
+  { from: "Bucuresti", to: "Ankara" },
+  { from: "Chisinau", to: "Bucuresti" },
+];
+
+const getTicketRoute = (ticket) => {
+  // Получаем массив отправных и конечных пунктов
+  const arrTicket = ticket
+    .map((obj) => {
+      return [obj.from, obj.to];
+    })
+    .flat();
+
+  // Получаем начальный и конечный пункт
+  startFinish = arrTicket.filter(
+    (el, _, arr) => arr.indexOf(el) === arr.lastIndexOf(el)
+  );
+
+  // Получаем первый билет/маршрут
+  const firstTicket = ticket.filter(
+    (obj) => obj.from === startFinish[0] || obj.from === startFinish[1]
+  );
+
+  // Получаем массив билетов в порядке маршрута
+  const tickets = [...firstTicket];
+  for (let i = 0; i < ticket.length; i += 1) {
+    for (let i = 0; i < ticket.length; i += 1) {
+      if (ticket[i].from === tickets[tickets.length - 1].to) {
+        tickets.push(ticket[i]);
+      }
+    }
+  }
+
+  return tickets;
+};
+
+console.log("Task 1:\n", getTicketRoute(input));
 
 // Task 2
 
